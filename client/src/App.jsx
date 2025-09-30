@@ -35,18 +35,18 @@ function App() {
         />
         <Button onClick={handleSearch}>Search</Button>
       </InputGroup>
-
-      <div style={{ marginTop: "30px" }}>
-        {albums.length > 0 ? (
-          <ul>
-            {albums.map((album) => (
-              <li key={album.id}>{album.name}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No albums found yet.</p>
-        )}
-      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginTop: "20px" }}>
+                {albums.map((album) => (
+                  <div key={album.id} style={{ width: "150px", textAlign: "center" }}>
+                    <img
+                      src={album.image}
+                      alt={album.name}
+                      style={{ width: "100%", borderRadius: "8px" }}
+                    />
+                    <p style={{ marginTop: "8px", fontWeight: "bold" }}>{album.name}</p>
+                  </div>
+                ))}
+              </div>
     </Container>
   );
 }
