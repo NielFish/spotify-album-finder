@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import albumRoutes from "./src/routes/albums.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -10,21 +12,19 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
+app.use("/api", albumRoutes);
+
 app.use(express.static(path.join(__dirname, "client/dist")));
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "/client/dist", "index.html"));
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
 });
 
 console.log("Serving frontend from:", path.join(__dirname, "client/dist"));
 
-
-
 app.listen(PORT, () => {
-  console.log("Backend running on http://127.0.0.1:3000");
+  console.log(`Backend running on http://127.0.0.1:${PORT}`);
 });
-
-
 
 /* 
 
